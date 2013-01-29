@@ -80,7 +80,7 @@ namespace Core.Domain
             bool selfCellAdded = false;
             List<T> neighborHood = new List<T>();
             //add left neighbor
-            if (cellX - 1 <= 0)
+            if (cellX - 1 < 0)
             {
                 neighborHood.Add(cell);
                 selfCellAdded = true;
@@ -102,7 +102,7 @@ namespace Core.Domain
             }
 
             //add top  
-            if (cellY - 1 <= 0)
+            if (cellY - 1 < 0)
             {
                 if(selfCellAdded == false)
                     neighborHood.Add(cell);
@@ -124,7 +124,7 @@ namespace Core.Domain
             }
 
             //Add Left Top
-            if((cellY - 1 <= 0) || (cellX - 1 <= 0))
+            if((cellY - 1 < 0) || (cellX - 1 < 0))
             {
                 if (selfCellAdded == false)
                     neighborHood.Add(cell);
@@ -135,7 +135,7 @@ namespace Core.Domain
             }
 
             //Add Right Top
-            if ((cellY - 1 <= 0) || (cellX + 1 >= Cells[0].Count))
+            if ((cellY - 1 < 0) || (cellX + 1 >= Cells[0].Count))
             {
                 if (selfCellAdded == false)
                     neighborHood.Add(cell);
@@ -146,7 +146,7 @@ namespace Core.Domain
             }
 
             //Add left bottom
-            if ((cellY + 1 >= Cells.Count) || (cellX - 1 <= 0))
+            if ((cellY + 1 >= Cells.Count) || (cellX - 1 < 0))
             {
                 if (selfCellAdded == false)
                     neighborHood.Add(cell);
