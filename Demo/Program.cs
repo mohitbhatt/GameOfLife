@@ -19,7 +19,23 @@ namespace Demo
             seedGeneration.Cells[2][1].IsAlive = true;
             seedGeneration.Cells[2][2].IsAlive = true;
             seedGeneration.Cells[2][3].IsAlive = true;
-            
+
+            //Toad
+            //Generation<SimpleCell> seedGeneration = new Generation<SimpleCell>(6, 6);
+            //seedGeneration.Cells[2][2].IsAlive = true;
+            //seedGeneration.Cells[2][3].IsAlive = true;
+            //seedGeneration.Cells[2][4].IsAlive = true;
+            //seedGeneration.Cells[3][1].IsAlive = true;
+            //seedGeneration.Cells[3][2].IsAlive = true;
+            //seedGeneration.Cells[3][3].IsAlive = true;
+
+            //Still Life - boat
+            //Generation<SimpleCell> seedGeneration = new Generation<SimpleCell>(4, 4);
+            //seedGeneration.Cells[1][1].IsAlive = true;
+            //seedGeneration.Cells[1][2].IsAlive = true;
+            //seedGeneration.Cells[2][1].IsAlive = true;
+            //seedGeneration.Cells[2][2].IsAlive = true;
+
             Engine<SimpleCell> engine = new Engine<SimpleCell>(seedGeneration, maxGens);
 
             engine.Process(Display);
