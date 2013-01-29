@@ -113,21 +113,21 @@ namespace Core
         public static bool ShouldCellDie(int totalAliveNeighborCount, bool isCellAliveRightNow)
         {
             //1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
-            if (totalAliveNeighborCount < 2)
+            if ((isCellAliveRightNow) && (totalAliveNeighborCount < 2))
             {
                 //the next gen state of this cell is dead
                 return true;
             }
 
             //2. Any live cell with two or three live neighbours lives on to the next generation.
-            if ((totalAliveNeighborCount == 2) || (totalAliveNeighborCount == 3))
+            if ((isCellAliveRightNow) && ((totalAliveNeighborCount == 2) || (totalAliveNeighborCount == 3)))
             {
                 //u got lucky dude, u get to live :). Thank thee neighbors
                 return false;
             }
 
             //3. Any live cell with more than three live neighbours dies, as if by overcrowding.
-            if (totalAliveNeighborCount > 3)
+            if ((isCellAliveRightNow) && (totalAliveNeighborCount > 3))
             {
                 //dude, u gotta understand, too many friends are deadly at times ;)
                 return true;
@@ -140,8 +140,8 @@ namespace Core
                 return false;
             }
 
-            //if we reach here, there is something fishy
-            throw new ApplicationException("RuleProcessor.ShouldCellDie - Unknown cell state.");
+            //all dead cells, stay put
+            return true;
         }
     }
 }
