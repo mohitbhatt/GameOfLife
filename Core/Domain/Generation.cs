@@ -47,6 +47,27 @@ namespace Core.Domain
             Cells = cells;
         }
 
+        public static List<List<T>> CreateCopy(List<List<T>> input)
+        {
+            int y = input.Count;
+            int x = input[0].Count;
+
+            var ret = new List<List<T>>();
+
+            for (int ctr1 = 0; ctr1 < y; ctr1++)
+            {
+                var innerList = new List<T>(x);
+                for (int innerCtr = 0; innerCtr < x; innerCtr++)
+                {
+                    var cell = new T();
+                    cell.IsAlive = input[ctr1][innerCtr].IsAlive;
+                    innerList.Add(cell);
+                }
+                ret.Add(innerList);
+            }
+
+            return ret;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -54,7 +75,7 @@ namespace Core.Domain
         /// <param name="cellX">is the number of column in row specified by cellY where cell is present</param>
         /// <param name="cellY">is the number of row in which cell is present</param>
         /// <returns></returns>
-        public List<T> GetNeighborHood(T cell, int cellX, int cellY)
+        public List<T> GetNeighborHood(T cell, int cellX, int cellY, List<List<T>> originalCells)
         {
             bool selfCellAdded = false;
             List<T> neighborHood = new List<T>();
@@ -66,7 +87,7 @@ namespace Core.Domain
             }
             else
             {
-                neighborHood.Add(Cells[cellY][cellX - 1]);
+                neighborHood.Add(originalCells[cellY][cellX - 1]);
             }
 
             //add right neighbor
@@ -77,7 +98,7 @@ namespace Core.Domain
             }
             else
             {
-                neighborHood.Add(Cells[cellY][cellX + 1]);
+                neighborHood.Add(originalCells[cellY][cellX + 1]);
             }
 
             //add top  
@@ -88,7 +109,7 @@ namespace Core.Domain
             }
             else
             {
-                neighborHood.Add(Cells[cellY - 1][cellX]);
+                neighborHood.Add(originalCells[cellY - 1][cellX]);
             }
 
             //add bottom
@@ -99,7 +120,7 @@ namespace Core.Domain
             }
             else
             {
-                neighborHood.Add(Cells[cellY + 1][cellX]);
+                neighborHood.Add(originalCells[cellY + 1][cellX]);
             }
 
             //Add Left Top
@@ -110,7 +131,7 @@ namespace Core.Domain
             }
             else
             {
-                neighborHood.Add(Cells[cellY - 1][cellX - 1]);
+                neighborHood.Add(originalCells[cellY - 1][cellX - 1]);
             }
 
             //Add Right Top
@@ -121,7 +142,7 @@ namespace Core.Domain
             }
             else
             {
-                neighborHood.Add(Cells[cellY - 1][cellX + 1]);
+                neighborHood.Add(originalCells[cellY - 1][cellX + 1]);
             }
 
             //Add left bottom
@@ -132,7 +153,7 @@ namespace Core.Domain
             }
             else
             {
-                neighborHood.Add(Cells[cellY + 1][cellX - 1]);
+                neighborHood.Add(originalCells[cellY + 1][cellX - 1]);
             }
 
 
@@ -144,7 +165,7 @@ namespace Core.Domain
             }
             else
             {
-                neighborHood.Add(Cells[cellY + 1][cellX + 1]);
+                neighborHood.Add(originalCells[cellY + 1][cellX + 1]);
             }
 
             return neighborHood;

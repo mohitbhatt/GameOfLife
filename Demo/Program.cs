@@ -10,16 +10,17 @@ namespace Demo
 {
     class Program
     {
+        static int maxGens = 10;
         static void Main(string[] args)
         {
             Generation<SimpleCell> seedGeneration = new Generation<SimpleCell>(5, 5);
             //setup seed
-            //Blinker - Oscillator
+            //Blinker (period 2) - Oscillator
             seedGeneration.Cells[2][1].IsAlive = true;
             seedGeneration.Cells[2][2].IsAlive = true;
             seedGeneration.Cells[2][3].IsAlive = true;
             
-            Engine<SimpleCell> engine = new Engine<SimpleCell>(seedGeneration, 10);
+            Engine<SimpleCell> engine = new Engine<SimpleCell>(seedGeneration, maxGens);
 
             engine.Process(Display);
             Console.WriteLine();
@@ -39,6 +40,9 @@ namespace Demo
                     Console.Write(part);
                 Console.WriteLine();
             }
+            Console.WriteLine();
+            //somehow make the gen level display correct for now
+            Console.WriteLine("Processed Gen {0}", currLevel);
         }
     }
 }
