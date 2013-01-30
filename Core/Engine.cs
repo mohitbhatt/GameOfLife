@@ -17,7 +17,7 @@ namespace Core
         public Generation<T> CurrentGeneration { get; set; }
         //getter because next generation is calculated here
         public Generation<T> NextGeneration { get; private set; }
-
+        public bool DontSleep { get; set; } //for unit testing
         //private copy
         private Generation<T> _originalSeed;
 
@@ -68,7 +68,8 @@ namespace Core
 
             //display seed
             onGenerationProcessed(CurrentGeneration, 0);
-            System.Threading.Thread.Sleep(1000);
+            if(DontSleep == false)
+                System.Threading.Thread.Sleep(1000);
 
             //now process current gen and put it in next gen
             int localGenCtr = MaxGenerations; //don't mess up with the public member
@@ -90,7 +91,8 @@ namespace Core
                     }
                 }
                 onGenerationProcessed(NextGeneration, MaxGenerations - localGenCtr);
-                System.Threading.Thread.Sleep(1000);
+                if(DontSleep == false)
+                    System.Threading.Thread.Sleep(1000);
                 CurrentGeneration = new Generation<T>(NextGeneration.Cells);
             }
         }
